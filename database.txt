@@ -1,0 +1,30 @@
+Тех. завдання сайту Vog:
+1. Сролл-меню сайту
+1. Секція меню (іжа, напоі) (переключення між типами напоів/страв для відображення конкретного класу меню) DB-api
+2. Знайомство з компанією
+3. Відображення страви дня Db-api
+4. Посилання (можлива інтеграція) з JustEat 
+5. Інформація про івенти. DB-API
+6. Керування даними з адмін панелі? 
+7. Додати мапу з розташуванням Openstreetmap_API
+8. Пошук по сайту 
+9. Контактні дані 
+10. Банери
+11. Анімація. 
+12. Окремі сторінки privacy/policy, типізація кавових напоїв
+
+menu: {
+	coffee: {type: {name: price},},
+	foods: {name: price},
+	deserts: {name: price},
+	beverages: {name: price},
+	beers: {name: price}, 
+	wine: {name: price},
+	whisky: {name: price},
+	cocktails: {name: price},
+	cocktails-non-alcohol: {name: price},
+},
+events: {type: [name, time, date]},
+Offer-of-the-day:{
+	type: [[info, name, price],],
+},
