@@ -1,0 +1,128 @@
+.sec_one{
+    background-color: var(--primary-color);
+}
+
+.venue_desc{
+
+    display: grid;
+    grid-template-rows: repeat(3, min-content);
+    grid-template-columns: auto 1fr auto;    padding: var(--padding-classic);
+    width: 100%;
+    gap: 2%;
+}
+.venue_desc .dot{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+}
+
+.venue_desc p{
+    font-weight: bold;
+    color: var(--action-color);
+    grid-row: 1 / 4;
+    grid-column: 2 / 3;
+    /* width: 500px; */
+    text-align: center;
+    font-size: 30px;
+    
+}
+
+.venue_desc p span{
+    transition: all 1.2s ease-out;
+}
+
+.venue_desc p span.switch_color{
+    color: var(--secondary-color);
+}
+
+
+.venue_desc .dot.one{
+    grid-row: 1 / 2;
+  grid-column: 1 / 2;
+}
+.venue_desc .dot.two{
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+}
+.venue_desc .dot.three{
+    grid-row: 1 / 2;
+    grid-column: 3 / 4;
+}
+.venue_desc .dot.four{
+    grid-row: 3 / 4;
+    grid-column: 3 / 4;
+}
+
+.flex_head{
+    display: grid;
+    /* padding-top: var(--padding-classic); */
+    background-color: var(--secondary-color);
+    justify-items: center;
+    /* justify-content: space-between; */
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+.flex_head .first_part_head{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.first_part_head .big-text-main{
+    text-align: center;
+    font-size: 10.3vw;
+    display: block;
+    width: 102vw;
+    overflow: hidden;
+    font-weight: bold;   
+    height: max-content;
+    font-family: var(--font-h);
+    line-height: 1;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+}
+
+.first_part_head .shadow{
+    -webkit-text-stroke: 1px var(--secondary-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    color: transparent;
+}
+.cup_of_coffee{
+    position: relative;
+    margin-top: -5%;
+    width: 340px;
+    z-index: 2;
+}
+
+
+.second_part_head{
+display: flex;
+flex-direction: column;
+/* width: 750px; */
+width: 52vw;
+gap: 50px;
+align-items: center;
+}
+
+.second_part_head a{
+    font-family: var(--font-p);
+    text-align: center;
+    text-decoration: none   ;
+    color: var(--primary-color);
+}
+.second_part_head p{
+    font-family: var(--font-p);
+    text-align: center;
+    /* width: 750px; */
+    color: var(--primary-color);
+    font-weight: 100;
+}
+
+
