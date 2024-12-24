@@ -3,26 +3,50 @@ import "./sectionOne.css";
 import Header from "./header";
 const cup = "/icons/cup_of_coffee.png";
 
+function parallaxEffectOnCup(ref, defStyle) {
+  if (!ref) return;
+  const obj = ref.current;
+  const defaultTop = parseFloat(defStyle.marginTop);
+  const defaultWidth = parseFloat(defStyle.width);
+
+  function activeScroll() {
+    if (window.scrollY > 0 && defStyle.marginTop.includes("%")) {
+      obj.style.marginTop = `${defaultTop - window.scrollY / 20}%`;
+    }
+    if (window.scrollY > 0 && defStyle.marginTop.includes("px")) {
+      obj.style.marginTop = `${defaultTop - window.scrollY / 3}px`;
+    }
+  }
+
+  window.addEventListener("scroll", activeScroll);
+
+  return () => {
+    window.removeEventListener("scroll", activeScroll);
+  };
+}
+
 function HeadBanner({ scrollRefs }) {
-  // const scrollToRef = (ref) => {
-  //   if (ref && ref.current) {
-  //     ref.current.scrollIntoView({ behavior: "smooth" });
-  //   }}
-
-  // const handleClick = (event, ref) => {
-  //   event.preventDefault(); // Запобігаємо переходу за посиланням
-  //   scrollToRef(ref);
-  // };
-
+  const imgRef = useRef(null);
   const textForHead =
     "Vog Bar — where your coffee experience transcends the ordinary. Nestled in the heart of Trieste, we are not just a café; we are a gathering place where exceptional Illy coffee meets warm hospitality. Whether you're savoring a morning espresso or indulging in a late afternoon treat, we invite you to unwind and immerse yourself in the unique flavor of Trieste’s coffee culture.";
+
+  useEffect(() => {
+    const defTop = window.getComputedStyle(imgRef.current);
+    const cleanUn = parallaxEffectOnCup(imgRef, defTop);
+    return cleanUn;
+  }, []);
 
   return (
     <section className="flex_head">
       <Header scrollRefs={scrollRefs} />
       <div className="first_part_head">
         <span className="big-text-main">CONNECTION AND COMMUNITY</span>
-        <img className="cup_of_coffee" src={cup} alt="cup of coffee" />
+        <img
+          ref={imgRef}
+          className="cup_of_coffee"
+          src={cup}
+          alt="cup of coffee"
+        />
         <div className="overflow-wrap">
           <span className="big-text-main shadow">CONNECTION AND COMMUNITY</span>
         </div>
@@ -85,17 +109,6 @@ function VenueDescription() {
   );
 }
 
-function SectionOne() {
-  return (
-    <section className="sec_one">
-      <HeadBanner></HeadBanner>
-      <VenueDescription></VenueDescription>
-    </section>
-  );
-}
-
-export default SectionOne;
-
 function colorChange(ref) {
   const spans = Array.from(ref.querySelectorAll("span"));
   const keyWords =
@@ -128,3 +141,14 @@ function colorChange(ref) {
     }
   }
 }
+
+function SectionOne() {
+  return (
+    <section className="sec_one">
+      <HeadBanner></HeadBanner>
+      <VenueDescription></VenueDescription>
+    </section>
+  );
+}
+
+export default SectionOne;
