@@ -1,6 +1,6 @@
 import "./sectionTwo.css";
 import database from "../database";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
 function BannerDeal() {
@@ -34,13 +34,13 @@ function BannerDeal() {
         style={{ backgroundImage: "url(/images/coffee_background.png)" }}
       >
         <h2>{bannerText.toLocaleUpperCase()}</h2>
-        <div className="flex-row deal-menu">
+        <div className="deal-menu">
           {menuItems.map((menuItem, index) => {
             // console.log("hello in", index);
             return (
               <div
                 key={index}
-                className={`menu-item item_#${
+                className={`deal-item item_#${
                   index + 1
                 } flex-column center gap-small`}
               >
@@ -66,11 +66,10 @@ function DynamicMenu() {
   const [hasError, setIsError] = useState(false);
   const [data, setData] = useState([]);
   const [categoryData, setCategoryData] = useState({});
-  // const [dataArray, setDataArray] = useState([]);
-
-
-//отримати меню
-  useEffect(() => { 
+  const menuCategory = useRef(null);
+  const menuContent = useRef(null);
+  //отримати меню
+  useEffect(() => {
     getDoc(doc(database, "bar-info", "menu"))
       .then((result) => {
         const data = result.data();
@@ -86,18 +85,10 @@ function DynamicMenu() {
   }, []);
 
   useEffect(() => {
-   /* if (!isLoading && data) {
-      const entries = Object.entries(data);
-      if (entries.length > 0) {
-       entries.forEach(([key,value])=> {
-        key == 'Coffee'? setCategoryData(value): setCategoryData(null)
-       })
-      }
-    }*/
-      if (!isLoading && data && data.Coffee && typeof data == 'object') {
-        setCategoryData(data.Coffee); // Автоматично обирає категорію "Coffee"
-      }
-    }, [isLoading, data]);
+    if (!isLoading && data && data.Coffee && typeof data == "object") {
+      setCategoryData(data.Coffee); // Автоматично обирає категорію "Coffee"
+    }
+  }, [isLoading, data]);
 
   if (isLoading) {
     return (
@@ -117,72 +108,92 @@ function DynamicMenu() {
         <h2 className="title-menu text-center">
           EXPERIENCE THE FULL RANGE OF OUR FLAVORS
         </h2>
-        <nav className="switch-category flex-row">
-          { Object.entries(data).map(([key, value]) => {
+        <div className="switch-category-slider flex-row">
+          <button
+            area-label="scroll to left category"
+            onClick={() => scrollMenu("left", menuCategory)}
+          ></button>
+
+          <nav ref={menuCategory} className="switch-category flex-row">
+            {Object.entries(data).map(([key, value]) => {
               return (
                 <button
                   key={key}
                   onClick={() => {
                     setCategoryData(value);
-                                    checkObj(value)
-
                   }}
                 >
                   {key}
                 </button>
-              )
-            })
-          }
-        </nav>
-        <div className={`content-menu flex-row`}>
-          {
-            !categoryData ? (<div> Choose data</div>) :
-    (
-            Object.entries(categoryData || {}).map(([key, value]) => {
-              if (typeof value === "string") {
-                // checkObj(categoryData)
-                return (
-                  <div key={key} className="flex-row gap-small">
-                    <p>{key}</p>
-                    <p>€{Number(value).toFixed(2)}</p>
-                  </div>
-                );
-              } else {
-                // checkObj(categoryData)
-                return (
-                  <div className="subcategory flex-column gap-small">
-                    <h2>{key}</h2>
-                    {Object.entries(value ||{}).map(([key, value]) => {
-    
-                      return (
-                        <div className="flex-row gap-small">
-                          <p>{key}:</p>
-                          <p>{value}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              }
-            })
-            )
-          }
+              );
+            })}
+          </nav>
+          <button
+            area-label="scroll to right category"
+            onClick={() => scrollMenu("right", menuCategory)}
+          ></button>
+        </div>
+        <div className="content-wrapper-slider">
+        {/* <button area-label="scroll to left menu book" onClick={() => scrollMenu("left", menuContent)}></button> */}
+          <div ref={menuContent} onMouseEnter={()=>scrollMause(menuContent)} className="content-wrapper gap-tall">
+            {!categoryData ? <div> Choose data</div> : checkObj(categoryData)}
+          </div>
+          {/* <button area-label="scroll to right menu book" onClick={() => scrollMenu("right", menuContent)}></button> */}
         </div>
       </div>
     );
-  }
+}
 
-function checkObj(data){
- Object.entries(data).map(([key, value])=>{
-    console.log(key, 'is the key') 
-    console.log(value, 'is the value')
-    if (typeof value === 'object'){
-      checkObj(value)
-      console.log(value, ' is deep')
+function checkObj(data) {
+  return Object.entries(data || {}).map(([key, value]) => {
+    if (typeof value === "object" && value !== null) {
+      return (
+        <div className="subcategory flex-column gap-small" key={key}>
+          <h2>{key}</h2>
+          {checkObj(value)}
+        </div>
+      );
+    } else if (typeof value === "string") {
+      return (
+        <div key={key} className="items-product flex-row gap-tall">
+          <p>{key}</p>
+          <p>{value}</p>
+        </div>
+      );
     }
-    else console.log(value, 'is shallow')
+    return null;
+  });
+}
 
-  })
+function scrollMenu(direction, ref) {
+  const menu = ref.current;
+
+  if (direction === "right") {
+    menu.scrollTo({
+      left: menu.scrollLeft + 300, // Прокрутка вліво на 300px
+      behavior: "smooth",
+    });
+  } else if (direction === "left") {
+    menu.scrollTo({
+      left: menu.scrollLeft - 300, // Прокрутка вправо на 300px
+      behavior: "smooth",
+    });
+  }
+}
+
+function scrollMause(ref) {
+  const content = ref.current;
+  content.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const scrollStep = 300;
+    if (event.deltaY < 0) {
+      content.scrollLeft -= scrollStep;
+    } else {
+      content.scrollLeft += scrollStep;
+    }
+  });
+
+
 }
 
 function SectionTwo() {
@@ -195,5 +206,3 @@ function SectionTwo() {
 }
 
 export default SectionTwo;
-
-

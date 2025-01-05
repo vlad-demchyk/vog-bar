@@ -124,6 +124,36 @@ align-items: center;
     color: var(--primary-color);
     font-weight: 100;
 }
+
+
+@media screen and (max-width: 800px) {
+    .second_part_head {
+        width: 90%;
+        gap:var(--gap-small);
+        font-size: var(--font-liquid-medium);
+    }
+    .second_part_head p{
+        text-align: start;
+        width: 100%;
+    }
+    .second_part_head a{
+        text-align: start;
+        width: 100%;
+    }
+
+    .venue_desc .dot{
+display: none;
+    }
+
+    .venue_desc p{
+        grid-row: 1 / 4;
+        grid-column: 1 / 4;
+        font-size: var(--font-liquid-medium);
+        text-align: start;
+        height: max-content;
+    }
+
+}
 @media screen and (max-width: 500px) {
     .cup_of_coffee{
         width: 65%;
