@@ -5,6 +5,7 @@
 .flex-row {
   display: flex;
   flex-direction: row;
+  
 }
 
 .center {
@@ -79,8 +80,8 @@ flex-direction: row;
   height: min-content;
 
 }
-.switch-category-slider > button:first-child{
-  background-image: url("/public/icons/left-arrow.svg");
+
+.switch-category-slider > button{
   position: absolute;
   background-position: center;
   background-size: contain;
@@ -89,24 +90,21 @@ flex-direction: row;
   height: 60%;
   opacity: 0.5;
   top: 50%; /* Позиціонуємо посередині */
-  left: 0;
-  transform: translate(50%, -50%);
   transition: all 0.3s ease;
+}
+
+.switch-category-slider > button:first-child{
+  background-image: url("/public/icons/left-arrow.svg");
+  left: 0;
+  margin-left: var(--gap-small);
+  transform: translate(50%, -50%);
 }
 
 .switch-category-slider > button:last-child{
   background-image: url("/public/icons/right-arrow.svg");
-  position: absolute;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  aspect-ratio: 1/1;
-  height: 60%;
-  opacity: 0.5;
-  top: 50%; /* Позиціонуємо посередині */
   right: 0;
+  margin-right: var(--gap-small);
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
 }
 
 .switch-category{

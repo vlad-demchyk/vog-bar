@@ -1,5 +1,5 @@
 import "./sectionTwo.css";
-import database from "../database";
+import { database } from "../database";
 import { useEffect, useRef, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -70,7 +70,7 @@ function DynamicMenu() {
   const [categoryData, setCategoryData] = useState({});
   const menuCategory = useRef(null);
   const menuContent = useRef(null);
-  //отримати меню
+  // отримати меню
   useEffect(() => {
     getDoc(doc(database, "bar-info", "menu"))
       .then((result) => {
@@ -85,6 +85,30 @@ function DynamicMenu() {
         setIsLoading(false);
       });
   }, []);
+
+  // useEffect(() => {
+  //   // Підписка на зміни в документі
+  //   const unsubscribe = onSnapshot(
+  //     doc(database, "bar-info", "menu"),
+  //     (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         const data = snapshot.data();
+  //         setData(data); // Оновлюємо стан при кожній зміні даних
+  //         setIsLoading(false);
+  //       } else {
+  //         console.log("No such document!");
+  //         setIsError(true);
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error("Error fetching snapshot: ", error);
+  //       setIsError(true);
+  //     }
+  //   );
+
+  //   // Відписка при демонтуванні компонента
+  //   return () => unsubscribe();
+  // }, []);
 
   useEffect(() => {
     if (!isLoading && data && data.Coffee && typeof data == "object") {
@@ -140,20 +164,9 @@ function DynamicMenu() {
           ></button>
         </div>
         <div className="content-wrapper-slider">
-          {/* <button area-label="scroll to left menu book" onClick={() => scrollMenu("left", menuContent)}></button> */}
-          <div
-            ref={menuContent}
-            // onMouseEnter={() => scrollMause(menuContent)}
-            className={`content-wrapper`}
-          >
-            {!categoryData ? (
-              <div> Choose data</div>
-            ) : (
-              // checkObj(categoryData)
-              renderMenu(categoryData)
-            )}
+          <div ref={menuContent} className={`content-wrapper`}>
+            {categoryData ? checkObj(categoryData) : <div>Choose data</div>}
           </div>
-          {/* <button area-label="scroll to right menu book" onClick={() => scrollMenu("right", menuContent)}></button> */}
         </div>
       </div>
     );
@@ -172,34 +185,41 @@ function checkObj(data) {
       return (
         <div key={key} className="items-product flex-row">
           <p>{key}</p>
-          <p>{key == "volume" || key == "type" ? value : "€" + Number(value).toFixed(2)}</p>
+          <p>
+            {key === "volume" || key === "type"
+              ? value
+              : "€" + Number(value).toFixed(2)}
+          </p>
         </div>
       );
     }
     return null;
-  })
+  });
 }
-
-function renderMenu(data) {
-  const menu = Object.entries(data || {}).map(([key, value])  => {return[key, value]});
-  console.log(menu)
-  if(menu.length === 0) {
-    return <div>Choose category</div>
-  }
-  return (
-    <div className="subContainer">
-      {menu.map((item, index) => {
-        return (
-          <div key={index} className="menu-item flex-row gap-small">
-            <p>{item[0]}</p>
-            {typeof item[1] == "string" ? <p>{item[1]}</p> : null}
-         
-           {console.log(item[1])}
-          </div>
-        )})}
-    </div>
-  )
-}
+// function renderMenu(data) {
+//   const menuEntries = Object.entries(data || {});
+//   return menuEntries.map(([key, value], index) => {
+//     if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+//       // Якщо є підкатегорії, обробляємо їх
+//       return (
+//         <div key={key} className="subContainer flex-column gap-small">
+//           <h2>{key}</h2>
+//           {renderMenu(value)}
+//         </div>
+//       );
+//     } else {
+//       // Якщо немає підкатегорій, рендеримо як один список
+//       return (
+//         <div key={index} className="outContainer flex-column gap-small">
+//           <div className="items-product flex-row">
+//             <p>{key}</p>
+//             <p>{typeof value === "number" ? "€" + value.toFixed(2) : value}</p>
+//           </div>
+//         </div>
+//       );
+//     }
+//   });
+// }
 
 function scrollMenu(direction, ref) {
   const menu = ref.current;
