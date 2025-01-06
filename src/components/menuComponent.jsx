@@ -20,7 +20,7 @@ function MenuComponent({scrollRefs}) {
     setMenuOpen?.(false);
   };
   return (
-    <nav>
+    <>
       <button
         className={`nav-toggle ${!isMenuOpened ? "" : "hidden"}`}
         onClick={() => {
@@ -65,7 +65,7 @@ function MenuComponent({scrollRefs}) {
           Contact us
         </a>
       </div>
-    </nav>
+    </>
   );
 }
 

@@ -1,9 +1,9 @@
 
 import "./header.css";
 import MenuComponent from "./menuComponent";
-const LOGO = "/icons/logo.png";
-const EATLOGO = "/icons/jeat-logo.png";
-const INSTLOGO = "/icons/insta-logo.png";
+const LOGO = process.env.PUBLIC_URL+"/icons/logo.png";
+const EATLOGO = process.env.PUBLIC_URL+"/icons/jeat-logo.png";
+const INSTLOGO = process.env.PUBLIC_URL+"/icons/insta-logo.png";
 
 function Header({ scrollRefs }) {
   return (

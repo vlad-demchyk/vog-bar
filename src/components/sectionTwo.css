@@ -203,9 +203,8 @@ z-index: 5;
   flex-direction: row;
   width: 100%;
   padding: 0;
-  /* justify-content: space-between; */
-  /* gap: var(--gap-small); */
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
+  flex-wrap: wrap;
   position: relative;
   overflow-x: scroll;
   scroll-behavior: smooth;
@@ -214,15 +213,18 @@ z-index: 5;
 
 }
 .content-wrapper>div{
-  flex: 0 0 auto; 
-  width: max-content;
-  padding: 0;
+  flex: 0 0 calc(100% / 3); 
+  min-width: min-content;
+  /* width: calc(100% / 4); */
+  padding: 0 0 var(--gap-small) 0;
   padding-right: var(--gap-tall);
+
   position: relative;
 }
 
 
-.content-wrapper >div:not(:last-child)::after{
+/* .content-wrapper >div:not(:last-child)::after{ */
+.content-wrapper >div::after{
   content: '';
   height: 100%;
   width: 2px;
@@ -230,7 +232,7 @@ z-index: 5;
   opacity: 0.5;
   position: absolute;
   top: 0;
-  right: 0;
+  right: var(--gap-small);
 }
 
 
@@ -243,8 +245,20 @@ z-index: 5;
 
 .items-product{
   justify-content: space-between;
+  
+}
+.items-product>:first-child{
+flex: 1;
 }
 
+.items-product>:last-child{
+flex: 0 0 max-content;
+}
+@media screen and (min-width: 1200px){
+  .content-wrapper>div{
+    flex: 0 0 calc(100% / 4); 
+  }
+}
 @media screen and (max-width: 800px){
   .banner-box .deal-menu {
 flex-direction: column;
@@ -270,30 +284,33 @@ gap: var(--gap-liquid);
 
   .content-wrapper{
     flex-direction: column;
-    gap: var(--gap-liquid);
+  
+    /* gap: var(--gap-liquid); */
   }
-  .content-wrapper>div{
+  .content-wrapper> div{
     flex: 0 0 auto; 
     width: 100%;
     padding: 0;
+    padding-bottom: var(--gap-tall);
     gap: 0;
   }
   .content-wrapper>div h2{
     margin-bottom: var(--gap-small);
     font-size: var(--font-liquid-medium);
   }
-  .content-wrapper>div div{
+  .content-wrapper>div{
     font-size: var(--font-liquid-small);
   }
 
-  .content-wrapper >div:not(:last-child)::after{
+  .content-wrapper >div::after{
     content: '';
     height: 2px;
     width: 100%;
     background-color: var(--secondary-color);
     opacity: 0.5;
     position: absolute;
-    top: 0;
+    top: auto;
+    bottom: var(--gap-small);
     right: 0;
   }
 

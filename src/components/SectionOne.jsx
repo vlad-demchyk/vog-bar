@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./sectionOne.css";
 import Header from "./header";
-const cup = "/icons/cup_of_coffee.png";
+const cup = `${process.env.PUBLIC_URL}/icons/cup_of_coffee.png`;
 
 function parallaxEffectOnCup(ref, defStyle) {
   if (!ref) return;

@@ -2,9 +2,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     width: 100%;
     padding-block: 2%;
     padding-inline: var(--padding-classic);
@@ -40,5 +37,24 @@
     justify-content: start;
     position: relative;
     overflow: hidden;
+    align-items: center;
 }
 
+@media screen and (max-width: 800px){
+    .header_container{
+        grid-template-columns: 10% 1fr;
+        gap: 20px;
+        direction: rtl;
+        /* writing-mode: vertical-rl; */
+    }
+    .header_container .social_links{
+        display: none;
+    }
+
+    .header_container .logo{
+        justify-content: flex-end
+    }
+ 
+
+
+}

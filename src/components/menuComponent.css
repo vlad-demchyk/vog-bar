@@ -28,9 +28,10 @@ button{
 
 .nav-toggle{
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     transition: all 0.5s ease-out;
+    transform: translate(0, -50%);
 }
 
 .nav-toggle.hidden{
