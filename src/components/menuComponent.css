@@ -1,11 +1,12 @@
 .navigation_links{
     position: relative;
+    display: flex;
+    gap: var(--gap-small);
     top: 0;
     left: 0;
-    transition: all 1s ease;
-    
-    
+    transition: all 1s ease;   
 }
+
 button{
     background-color: transparent;
     border: none;
@@ -16,7 +17,7 @@ button{
 
 .navigation_links > *{
     text-decoration: none;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     color: var(--primary-color);
 }
 
@@ -28,12 +29,53 @@ button{
 
 .nav-toggle{
     position: absolute;
-    top: 50%;
-    left: 0;
+    z-index: 10;
     transition: all 0.5s ease-out;
-    transform: translate(0, -50%);
 }
 
-.nav-toggle.hidden{
+.hidden{
 filter: opacity(0);
+/* display: none; */
 }
+
+@media screen and (max-width: 1200px) {
+    .navigation_links{
+        gap: 1vw;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .nav-toggle{
+        position: relative;
+        /* background-image: url(/public/icons/burger-menu-open-icon.png); */
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        aspect-ratio: 4/3;
+        width: 24px;
+    }
+
+    .navigation_links{
+     position: fixed;
+     background-color: black;
+     align-items: center;
+     flex-direction: column;
+     justify-content: center;
+     opacity: 0.8;
+     height: 100vh;
+     width: 70vw;
+     z-index: 6;
+    }
+
+
+
+    .navigation_links > *{
+    padding: 0;
+    font-size: 2rem;
+    }
+ 
+    
+}
+
+
+

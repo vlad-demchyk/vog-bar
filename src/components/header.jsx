@@ -9,6 +9,7 @@ function Header({ scrollRefs }) {
   return (
     <div className="header_container">
       <div className="navigation">
+      {/* <button alt="burger_icon" className="burger_icon">Burger</button> */}
         <MenuComponent scrollRefs={scrollRefs} />
       </div>
       <div className="logo">

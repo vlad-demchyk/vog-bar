@@ -13,7 +13,8 @@ function App() {
     <div>
       {/* <Header scrollRefs={scrollRefs}/> */}
       <SectionOne setScrollRefs={setScrollRefs} scrollRefs={scrollRefs}/>
-     <SectionTwo/>
+     <SectionTwo
+     setScrollRefs={setScrollRefs} scrollRefs={scrollRefs}/>
     </div>
   );
 }
