@@ -75,7 +75,8 @@ flex-direction: row;
 
 .switch-category-slider{
   width: 100%;
-  display: inline;
+  display: flex;
+  justify-content: center;
   position: relative;
   height: min-content;
 
@@ -312,4 +313,27 @@ gap: var(--gap-liquid);
     right: 0;
   }
 
+}
+
+@media screen and (max-width: 600px){
+
+
+
+.switch-category-slider > button{
+  height: 100%;
+}
+  .switch-category{
+    width: 80%;
+    gap: var(--gap-liquid);
+  }
+
+  .switch-category button{
+    font-size: var(--font-liquid-medium);
+    padding-right: var(--gap-liquid);
+  }
+  
+  .switch-category > button:not(:last-child)::after {
+    right: 3px;
+  }
+  
 }

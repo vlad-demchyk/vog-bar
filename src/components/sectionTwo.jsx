@@ -196,30 +196,6 @@ function checkObj(data) {
     return null;
   });
 }
-// function renderMenu(data) {
-//   const menuEntries = Object.entries(data || {});
-//   return menuEntries.map(([key, value], index) => {
-//     if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-//       // Якщо є підкатегорії, обробляємо їх
-//       return (
-//         <div key={key} className="subContainer flex-column gap-small">
-//           <h2>{key}</h2>
-//           {renderMenu(value)}
-//         </div>
-//       );
-//     } else {
-//       // Якщо немає підкатегорій, рендеримо як один список
-//       return (
-//         <div key={index} className="outContainer flex-column gap-small">
-//           <div className="items-product flex-row">
-//             <p>{key}</p>
-//             <p>{typeof value === "number" ? "€" + value.toFixed(2) : value}</p>
-//           </div>
-//         </div>
-//       );
-//     }
-//   });
-// }
 
 function scrollMenu(direction, ref) {
   const menu = ref.current;
