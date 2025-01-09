@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/vog-bar/static/css/main.cc988c29.css",
+    "main.css": "/vog-bar/static/css/main.d70d311d.css",
     "main.js": "/vog-bar/static/js/main.76ce0d82.js",
     "static/js/453.31771b72.chunk.js": "/vog-bar/static/js/453.31771b72.chunk.js",
     "index.html": "/vog-bar/index.html",
     "static/media/left-arrow.svg": "/vog-bar/static/media/left-arrow.f544e204f5b32475aeb5.svg",
     "static/media/right-arrow.svg": "/vog-bar/static/media/right-arrow.977c10e59f2d7f19a203.svg",
-    "main.cc988c29.css.map": "/vog-bar/static/css/main.cc988c29.css.map",
+    "main.d70d311d.css.map": "/vog-bar/static/css/main.d70d311d.css.map",
     "main.76ce0d82.js.map": "/vog-bar/static/js/main.76ce0d82.js.map",
     "453.31771b72.chunk.js.map": "/vog-bar/static/js/453.31771b72.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cc988c29.css",
+    "static/css/main.d70d311d.css",
     "static/js/main.76ce0d82.js"
   ]
 }
