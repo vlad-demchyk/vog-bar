@@ -84,6 +84,7 @@
     color: var(--primary-color);
     position: relative;
     z-index: 1;
+    transform: translateY(0);
 }
 
 .first_part_head .shadow{

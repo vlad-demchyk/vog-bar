@@ -1,6 +1,6 @@
 .header_container{
     display: grid;
-    /* grid-template-columns: repeat(3, 1fr); */
+    background-color: var(--secondary-color);
     grid-template-columns: 1fr max-content 1fr;
     align-items: center;
     width: 100%;

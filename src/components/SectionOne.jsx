@@ -1,20 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./sectionOne.css";
-import Header from "./header";
+import { scrollToElement } from "../tools/utils";
+import { MenuContext } from "../tools/MenuContext";
 const cup = `${process.env.PUBLIC_URL}/icons/cup_of_coffee.png`;
 
-function parallaxEffectOnCup(ref, defStyle) {
-  if (!ref) return;
-  const obj = ref.current;
-  const defaultTop = parseFloat(defStyle.marginTop);
-  const defaultWidth = parseFloat(defStyle.width);
-
+function parallaxEffectOnCup() {
+  const mainTextCollection = document.querySelectorAll(".big-text-main");
   function activeScroll() {
-    if (window.scrollY > 0 && defStyle.marginTop.includes("%")) {
-      obj.style.marginTop = `${defaultTop - window.scrollY / 20}%`;
-    }
-    if (window.scrollY > 0 && defStyle.marginTop.includes("px")) {
-      obj.style.marginTop = `${defaultTop - window.scrollY / 3}px`;
+    if (window.scrollY > 0) {
+      mainTextCollection.forEach((mainText) => {
+        mainText.style.transform = `translateY(${window.scrollY / 4}px)`;
+      });
     }
   }
 
@@ -26,19 +22,18 @@ function parallaxEffectOnCup(ref, defStyle) {
 }
 
 function HeadBanner({ scrollRefs }) {
+  const {setMenuOpen} = useContext(MenuContext)
   const imgRef = useRef(null);
   const textForHead =
     "Vog Bar — where your coffee experience transcends the ordinary. Nestled in the heart of Trieste, we are not just a café; we are a gathering place where exceptional Illy coffee meets warm hospitality. Whether you're savoring a morning espresso or indulging in a late afternoon treat, we invite you to unwind and immerse yourself in the unique flavor of Trieste’s coffee culture.";
 
   useEffect(() => {
-    const defTop = window.getComputedStyle(imgRef.current);
-    const cleanUn = parallaxEffectOnCup(imgRef, defTop);
+    const cleanUn = parallaxEffectOnCup(imgRef);
     return cleanUn;
   }, []);
 
   return (
     <section className="flex_head">
-      <Header scrollRefs={scrollRefs} />
       <div className="first_part_head">
         <span className="big-text-main">CONNECTION AND COMMUNITY</span>
         <img
@@ -47,13 +42,11 @@ function HeadBanner({ scrollRefs }) {
           src={cup}
           alt="cup of coffee"
         />
-        <div className="overflow-wrap">
-          <span className="big-text-main shadow">CONNECTION AND COMMUNITY</span>
-        </div>
+        <span className="big-text-main shadow">CONNECTION AND COMMUNITY</span>
       </div>
       <div className="second_part_head">
         <p>{textForHead.toLocaleUpperCase()}</p>
-        <a onClick={(event) => {}} href="#">
+        <a href="#menu" onClick={(e) => scrollToElement(scrollRefs.menuRef, setMenuOpen, e)}>
           •EXPLORE OUR MENU
         </a>
       </div>
@@ -61,10 +54,19 @@ function HeadBanner({ scrollRefs }) {
   );
 }
 
-function VenueDescription() {
+function VenueDescription({ setScrollRefs }) {
   const refWords = useRef(null);
   const refSection = useRef(null);
   const [isVisible, setIsVisible] = useState(undefined);
+  const aboutRef = refSection;
+
+  useEffect(() => {
+    setScrollRefs((prev) => ({
+      ...prev,
+      aboutRef,
+    }));
+  }, [setScrollRefs]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -95,7 +97,7 @@ function VenueDescription() {
   let phraseArray = txt.split(/(?<=[,.!?;—-]),?\s+/);
   // .split(/[.,!?;—-]/);
   return (
-    <section ref={refSection} className="venue_desc">
+    <section id="about" ref={refSection} className="venue_desc">
       <p ref={refWords}>
         {phraseArray.map((phrase, index) => {
           return <span key={index}>{phrase + " "}</span>;
@@ -142,11 +144,11 @@ function colorChange(ref) {
   }
 }
 
-function SectionOne() {
+function SectionOne({ scrollRefs, setScrollRefs }) {
   return (
     <section className="sec_one">
-      <HeadBanner></HeadBanner>
-      <VenueDescription></VenueDescription>
+      <HeadBanner scrollRefs={scrollRefs}></HeadBanner>
+      <VenueDescription setScrollRefs={setScrollRefs}></VenueDescription>
     </section>
   );
 }

@@ -5,21 +5,23 @@ const LOGO = process.env.PUBLIC_URL+"/icons/logo.png";
 const EATLOGO = process.env.PUBLIC_URL+"/icons/jeat-logo.png";
 const INSTLOGO = process.env.PUBLIC_URL+"/icons/insta-logo.png";
 
+
 function Header({ scrollRefs }) {
   return (
     <div className="header_container">
       <div className="navigation">
-      {/* <button alt="burger_icon" className="burger_icon">Burger</button> */}
+        
         <MenuComponent scrollRefs={scrollRefs} />
+        
       </div>
       <div className="logo">
-        <img src={LOGO} alt="logo" />
+        <img src={LOGO} alt="company label" />
       </div>
       <nav className="social_links">
-          <a href="#">
+          <a href="#JustEat">
             <img src={EATLOGO} alt="JustEat" />
           </a>
-          <a href="#">
+          <a href="#Inst">
             <img src={INSTLOGO} alt="Instagram" />
           </a>
       </nav>

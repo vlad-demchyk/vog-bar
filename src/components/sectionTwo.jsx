@@ -1,5 +1,5 @@
 import "./sectionTwo.css";
-import { database } from "../database";
+import { database } from "../tools/database";
 import { useEffect, useRef, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -30,6 +30,7 @@ function BannerDeal() {
   return (
     <>
       <div
+        aria-label="Daily Specials"
         className="banner-box flex-column center gap-tall"
         style={{
           backgroundImage: `url(${process.env.PUBLIC_URL}/images/coffee_background.png)`,
@@ -63,13 +64,22 @@ function BannerDeal() {
   );
 }
 
-function DynamicMenu() {
+function DynamicMenu({setScrollRefs}) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setIsError] = useState(false);
   const [data, setData] = useState([]);
   const [categoryData, setCategoryData] = useState({});
   const menuCategory = useRef(null);
-  const menuContent = useRef(null);
+  const menuRef = useRef(null);
+
+  
+  useEffect(() => {
+    setScrollRefs((prev) => ({
+      ...prev,
+      menuRef,
+    }));
+  }, [setScrollRefs]);
+
   // отримати меню
   useEffect(() => {
     getDoc(doc(database, "bar-info", "menu"))
@@ -130,7 +140,7 @@ function DynamicMenu() {
 
   if (!isLoading && data)
     return (
-      <div className="menu-wrapper flex-column">
+      <div id="menu" ref={menuRef} className="menu-wrapper flex-column">
         <h2 className="title-menu text-center">
           EXPERIENCE THE FULL RANGE OF OUR FLAVORS
         </h2>
@@ -164,7 +174,7 @@ function DynamicMenu() {
           ></button>
         </div>
         <div className="content-wrapper-slider">
-          <div ref={menuContent} className={`content-wrapper`}>
+          <div className={`content-wrapper`}>
             {categoryData ? checkObj(categoryData) : <div>Choose data</div>}
           </div>
         </div>
@@ -226,11 +236,11 @@ function scrollMause(ref) {
   });
 }
 
-function SectionTwo() {
+function SectionTwo({ setScrollRefs, scrollRefs }) {
   return (
-    <section>
+    <section className="sec_two">
       <BannerDeal></BannerDeal>
-      <DynamicMenu></DynamicMenu>
+      <DynamicMenu setScrollRefs={setScrollRefs} ></DynamicMenu>
     </section>
   );
 }
