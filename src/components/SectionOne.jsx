@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./sectionOne.css";
 import { scrollToElement } from "../tools/utils";
-import { MenuContext } from "../tools/MenuContext";
+import { MenuContext } from "../tools/SetContext";
 const cup = `${process.env.PUBLIC_URL}/icons/cup_of_coffee.png`;
 
 function parallaxEffectOnCup() {
@@ -22,7 +22,7 @@ function parallaxEffectOnCup() {
 }
 
 function HeadBanner({ scrollRefs }) {
-  const {setMenuOpen} = useContext(MenuContext)
+  const { setMenuOpen } = useContext(MenuContext);
   const imgRef = useRef(null);
   const textForHead =
     "Vog Bar — where your coffee experience transcends the ordinary. Nestled in the heart of Trieste, we are not just a café; we are a gathering place where exceptional Illy coffee meets warm hospitality. Whether you're savoring a morning espresso or indulging in a late afternoon treat, we invite you to unwind and immerse yourself in the unique flavor of Trieste’s coffee culture.";
@@ -46,7 +46,10 @@ function HeadBanner({ scrollRefs }) {
       </div>
       <div className="second_part_head">
         <p>{textForHead.toLocaleUpperCase()}</p>
-        <a href="#menu" onClick={(e) => scrollToElement(scrollRefs.menuRef, setMenuOpen, e)}>
+        <a
+          href="#menu"
+          onClick={(e) => scrollToElement(scrollRefs.menuRef, setMenuOpen, e)}
+        >
           •EXPLORE OUR MENU
         </a>
       </div>
@@ -65,7 +68,7 @@ function VenueDescription({ setScrollRefs }) {
       ...prev,
       aboutRef,
     }));
-  }, [setScrollRefs]);
+  }, [setScrollRefs, aboutRef]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

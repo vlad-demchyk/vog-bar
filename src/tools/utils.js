@@ -10,3 +10,18 @@ export function scrollToElement(ref, setMenuOpen, event){
       }
     
   };
+
+  export function navLinks(){
+    const EATLOGO = process.env.PUBLIC_URL+"/icons/jeat-logo.png";
+    const INSTLOGO = process.env.PUBLIC_URL+"/icons/insta-logo.png";
+    return (
+       <nav className="social_links">
+      <a href="#JustEat">
+        <img src={EATLOGO} alt="JustEat" />
+      </a>
+      <a href="#Inst">
+        <img src={INSTLOGO} alt="Instagram" />
+      </a>
+  </nav>
+  )
+  }

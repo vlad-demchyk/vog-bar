@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useContext } from "react";
+import { navLinks } from "../tools/utils";
 import "./menuComponent.css";
 import { scrollToElement } from "../tools/utils";
-import { MenuContext } from "../tools/MenuContext";
+import { MenuContext, ScreenContext } from "../tools/SetContext";
 
 function MenuComponent({ scrollRefs }) {
-  const {isMenuOpened, setMenuOpen} = useContext(MenuContext);
-  const [isMobileScreen, setMobileScreen] = useState(undefined);
+  const { isMenuOpened, setMenuOpen } = useContext(MenuContext);
+  const { isMobileScreen } = useContext(ScreenContext);
   const button_menu = useRef(null);
   const iconBurgerOpened = process.env.PUBLIC_URL + "/icons/burger-opened.png";
   const iconBurgerClosed = process.env.PUBLIC_URL + "/icons/burger-closed.png";
@@ -14,49 +15,31 @@ function MenuComponent({ scrollRefs }) {
     setMenuOpen((prevState) => !prevState);
   };
 
-  const handleResize = (button_menu) => {
-    const scope = button_menu.current;
 
-    if (window.innerWidth <= 800) {
-      setMobileScreen(true);
+  useEffect(() => {
+    const scope = button_menu.current;
+    if (isMobileScreen) {
       scope.innerHTML = "";
-      scope.setAttribute("alt", "burger menu icon");
+      scope.setAttribute("area-label", "burger menu icon");
       isMenuOpened
         ? (scope.style.backgroundImage = `url(${iconBurgerClosed})`)
         : (scope.style.backgroundImage = `url(${iconBurgerOpened})`);
       scope.style.position = "fixed";
-    } else if (window.innerWidth > 800) {
-      setMobileScreen(false);
+    } else if (!isMobileScreen) {
       scope.innerHTML = "•Menu";
       scope.style.backgroundImage = "";
       scope.style.position = "";
     }
-  };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobileScreen, isMenuOpened]);
 
-  // const scrollToElement = (event, ref) => {
-  //   event.preventDefault();
-  //   setMenuOpen?.(false);
-  //   const position = ref?.current?.getBoundingClientRect();
-  //   console.log(position);
-  //   console.log(ref.current.offsetTop + "px offsetTop of element");
-  //   console.log(window.scrollY + "px scroll from start to present position");
-  //   (function scrollToRef(ref) {
-  //     if (ref && ref.current) {
-  //       window.scrollTo({
-  //         top: ref.current.offsetTop,
-  //         behavior: "smooth",
-  //       });
-  //     }
-  //   })(ref)
-  // };
-
-  useEffect(() => {
+  /*useEffect(() => {
     handleResize(button_menu);
     window.addEventListener("resize", () => handleResize(button_menu));
     return () => {
       window.removeEventListener("resize", () => handleResize(button_menu));
     };
-  }, [isMenuOpened, isMobileScreen]);
+  }, [isMenuOpened, isMobileScreen]);*/
 
   return (
     <>
@@ -72,12 +55,13 @@ function MenuComponent({ scrollRefs }) {
         •Menu
       </button>
       <nav className={`navigation_links ${isMenuOpened ? "" : "hidden"}`}>
-        <button
-          className={isMobileScreen ? "hidden" : ""}
-          onClick={() => setMenuOpen((prevState) => !prevState)}
-        >
-          {"<"}
-        </button>
+        { !isMobileScreen? 
+          <button
+            onClick={() => setMenuOpen((prevState) => !prevState)}
+          >
+            {"<"}
+          </button> : navLinks()
+        }
         <a
           href="#about"
           className="text-link-style"
