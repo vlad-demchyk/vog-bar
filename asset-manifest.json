@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/vog-bar/static/css/main.4a672c60.css",
-    "main.js": "/vog-bar/static/js/main.4e246485.js",
+    "main.css": "/vog-bar/static/css/main.f48b2a9b.css",
+    "main.js": "/vog-bar/static/js/main.9620384c.js",
     "static/js/453.31771b72.chunk.js": "/vog-bar/static/js/453.31771b72.chunk.js",
     "index.html": "/vog-bar/index.html",
     "static/media/left-arrow.svg": "/vog-bar/static/media/left-arrow.f544e204f5b32475aeb5.svg",
     "static/media/right-arrow.svg": "/vog-bar/static/media/right-arrow.977c10e59f2d7f19a203.svg",
-    "main.4a672c60.css.map": "/vog-bar/static/css/main.4a672c60.css.map",
-    "main.4e246485.js.map": "/vog-bar/static/js/main.4e246485.js.map",
+    "main.f48b2a9b.css.map": "/vog-bar/static/css/main.f48b2a9b.css.map",
+    "main.9620384c.js.map": "/vog-bar/static/js/main.9620384c.js.map",
     "453.31771b72.chunk.js.map": "/vog-bar/static/js/453.31771b72.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4a672c60.css",
-    "static/js/main.4e246485.js"
+    "static/css/main.f48b2a9b.css",
+    "static/js/main.9620384c.js"
   ]
 }
