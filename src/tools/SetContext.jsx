@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 // Створення контексту
 const MenuContext = createContext();
 const ScreenContext = createContext();
+const NavigationContext = createContext();
 
 function MenuProvider({ children }) {
   const [isMenuOpened, setMenuOpen] = useState(false);
@@ -16,17 +17,17 @@ function MenuProvider({ children }) {
 function ScreenProvider({ children }) {
   const [isMobileScreen, setMobileScreen] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     function handleResize() {
       setMobileScreen(window.innerWidth <= 800);
     }
 
     handleResize(); // Встановити початковий стан
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
-  },[])
-  
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <ScreenContext.Provider value={{ isMobileScreen, setMobileScreen }}>
       {children}
@@ -34,13 +35,23 @@ function ScreenProvider({ children }) {
   );
 }
 
+function NavigationProvaider({ children }) {
+  const [scrollRefs, setScrollRefs] = useState({});
+  return (
+    <NavigationContext.Provider value={{ scrollRefs, setScrollRefs }}>
+      {children}
+    </NavigationContext.Provider>
+  );
+}
+
 function AppProviders({ children }) {
   return (
     <MenuProvider>
-      <ScreenProvider>{children}</ScreenProvider>
+      <ScreenProvider>
+        <NavigationProvaider>{children}</NavigationProvaider>
+      </ScreenProvider>
     </MenuProvider>
   );
 }
 
-export { MenuContext, ScreenContext, AppProviders };
-
+export { MenuContext, ScreenContext, NavigationContext, AppProviders };

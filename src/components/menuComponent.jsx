@@ -1,10 +1,11 @@
 import { useEffect, useRef, useContext } from "react";
-import { navLinks } from "../tools/utils";
+import { navLinksSocial, navMenu, scrollToElement} from "../tools/utils";
 import "./menuComponent.css";
-import { scrollToElement } from "../tools/utils";
-import { MenuContext, ScreenContext } from "../tools/SetContext";
+// import { scrollToElement, navMenu } from "../tools/utils";
+import { MenuContext, ScreenContext, NavigationContext} from "../tools/SetContext";
 
-function MenuComponent({ scrollRefs }) {
+function MenuComponent() {
+  const { scrollRefs } = useContext(NavigationContext)
   const { isMenuOpened, setMenuOpen } = useContext(MenuContext);
   const { isMobileScreen } = useContext(ScreenContext);
   const button_menu = useRef(null);
@@ -60,40 +61,9 @@ function MenuComponent({ scrollRefs }) {
             onClick={() => setMenuOpen((prevState) => !prevState)}
           >
             {"<"}
-          </button> : navLinks()
+          </button> : navLinksSocial()
         }
-        <a
-          href="#about"
-          className="text-link-style"
-          onClick={(e) => scrollToElement(scrollRefs.aboutRef, setMenuOpen, e)}
-        >
-          About
-        </a>
-
-        <a
-          href="#menu"
-          className="text-link-style"
-          onClick={(e) => scrollToElement(scrollRefs.menuRef, setMenuOpen, e)}
-        >
-          Menu
-        </a>
-
-        <a
-          href="#events"
-          className="text-link-style"
-          onClick={(e) => scrollToElement(scrollRefs.eventsRef, setMenuOpen, e)}
-        >
-          Events
-        </a>
-        <a
-          href="#contacts"
-          className="text-link-style"
-          onClick={(e) =>
-            scrollToElement(scrollRefs.contactsRef, setMenuOpen, e)
-          }
-        >
-          Contact us
-        </a>
+       {navMenu(scrollToElement, scrollRefs, setMenuOpen)}
       </nav>
     </>
   );

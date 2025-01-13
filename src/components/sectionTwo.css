@@ -65,7 +65,7 @@ flex-direction: row;
   padding: var(--padding-classic);
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  overflow-x: scroll;
+  overflow-x: hidden;
   gap: var(--gap-medium);
   padding: 0;
 }

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./sectionOne.css";
 import { scrollToElement } from "../tools/utils";
-import { MenuContext } from "../tools/SetContext";
+import { MenuContext, NavigationContext } from "../tools/SetContext";
 const cup = `${process.env.PUBLIC_URL}/icons/cup_of_coffee.png`;
 
 function parallaxEffectOnCup() {
@@ -21,7 +21,8 @@ function parallaxEffectOnCup() {
   };
 }
 
-function HeadBanner({ scrollRefs }) {
+function HeadBanner() {
+  const { scrollRefs } = useContext(NavigationContext)
   const { setMenuOpen } = useContext(MenuContext);
   const imgRef = useRef(null);
   const textForHead =
@@ -57,7 +58,8 @@ function HeadBanner({ scrollRefs }) {
   );
 }
 
-function VenueDescription({ setScrollRefs }) {
+function VenueDescription() {
+  const {setScrollRefs} = useContext(NavigationContext)
   const refWords = useRef(null);
   const refSection = useRef(null);
   const [isVisible, setIsVisible] = useState(undefined);
@@ -147,11 +149,11 @@ function colorChange(ref) {
   }
 }
 
-function SectionOne({ scrollRefs, setScrollRefs }) {
+function SectionOne() {
   return (
     <section className="sec_one">
-      <HeadBanner scrollRefs={scrollRefs}></HeadBanner>
-      <VenueDescription setScrollRefs={setScrollRefs}></VenueDescription>
+      <HeadBanner></HeadBanner>
+      <VenueDescription></VenueDescription>
     </section>
   );
 }

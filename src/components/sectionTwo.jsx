@@ -1,7 +1,8 @@
 import "./sectionTwo.css";
 import { database } from "../tools/database";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
+import { NavigationContext } from "../tools/SetContext";
 
 function BannerDeal() {
   const bannerText = "Breakfast Sets to Start Your Day Right";
@@ -64,7 +65,8 @@ function BannerDeal() {
   );
 }
 
-function DynamicMenu({setScrollRefs}) {
+function DynamicMenu() {
+  const {setScrollRefs} = useContext(NavigationContext)
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setIsError] = useState(false);
   const [data, setData] = useState([]);
@@ -236,11 +238,11 @@ function scrollMause(ref) {
   });
 }
 
-function SectionTwo({ setScrollRefs, scrollRefs }) {
+function SectionTwo() {
   return (
     <section className="sec_two">
       <BannerDeal></BannerDeal>
-      <DynamicMenu setScrollRefs={setScrollRefs} ></DynamicMenu>
+      <DynamicMenu></DynamicMenu>
     </section>
   );
 }

@@ -30,3 +30,8 @@
 body{
   position: relative;
 }
+
+.text-link-style{
+  text-decoration: none;
+  color: var(--primary-color);
+}

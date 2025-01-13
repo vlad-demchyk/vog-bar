@@ -1,0 +1,34 @@
+footer{
+    background-color: var(--secondary-color);
+    padding-inline: var(--padding-classic);
+    padding-block: 2%;
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    /* grid-template: subgrid; */
+}
+
+#all_rights{
+    color: var(--primary-color);
+    opacity: 0.3;
+}
+
+.nav_footer{
+    display: flex;
+    gap: var(--gap-small);
+}
+
+@media screen and (max-width: 800px){
+    footer{
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        gap: var(--gap-small);
+    }
+
+    .nav_footer{
+        display: none;
+    }
+
+    
+}
