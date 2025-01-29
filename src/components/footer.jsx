@@ -13,7 +13,7 @@ function Footer(){
 
     return(
         <footer className="footer">
-            <a href="#logo_company">
+            <a className="logo_footer" href="#logo_company">
                 <img src={LOGO} alt="click to scrool onto header" />
             </a>
             <div className="nav_footer">

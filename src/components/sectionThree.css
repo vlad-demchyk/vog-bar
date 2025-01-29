@@ -1,0 +1,6 @@
+.contact_wrapper{
+    width: 100%;
+    /* height: minmax(min-content, 500px); */
+    height: clamp(min-content, 300px, 600px);
+    background-color: var(--secondary-color);
+}
