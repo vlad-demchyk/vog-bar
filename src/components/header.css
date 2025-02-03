@@ -18,9 +18,13 @@
     margin-left: 20px;
 }
 
-.social_links a:nth-of-type(2) img{
-    height: 70%;
+.social_links a  img{
+    height: 40px;
+    
 }
+/* .social_links a:nth-of-type(2) img{
+    height: 70%;
+} */
 
 .header_container .logo{
     width: 100%;

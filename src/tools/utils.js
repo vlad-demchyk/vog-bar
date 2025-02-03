@@ -13,12 +13,12 @@ export function scrollToElement(ref, setMenuOpen, event){
   };
 
   export function navLinksSocial(){
-    const EATLOGO = process.env.PUBLIC_URL+"/icons/jeat-logo.png";
-    const INSTLOGO = process.env.PUBLIC_URL+"/icons/insta-logo.png";
+    const EATLOGO = process.env.PUBLIC_URL+"/icons/delivery-logo.svg";
+    const INSTLOGO = process.env.PUBLIC_URL+"/icons/insta-logo.svg";
     return (
        <nav className="social_links">
-      <a href="https://www.justeat.it/restaurants-vog-bar---coffees-and-drinks-trieste/menu">
-        <img src={EATLOGO} alt="JustEat" />
+      <a href="https://dishcovery.menu/app/restaurants/b81ac505342baf3a067029bd4cbdb35d">
+        <img src={EATLOGO} alt="Delivery" />
       </a>
       <a href="https://www.instagram.com/vogbar2024?igsh=bTU4dW1kOTk2c2tr">
         <img src={INSTLOGO} alt="Instagram" />

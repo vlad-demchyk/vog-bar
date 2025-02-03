@@ -28,7 +28,7 @@
   box-sizing: border-box;
   gap: var(--gap-medium);
   height: min-content;
-  background-color: rgb(77, 32, 0);
+  background-color: var(--coffee-color);
   color: var(--primary-color);
   background-repeat: no-repeat;
   background-size: cover;

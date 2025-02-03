@@ -33,9 +33,9 @@ function BannerDeal() {
       <div
         aria-label="Daily Specials"
         className="banner-box flex-column center gap-tall"
-        style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/images/coffee_background.png)`,
-        }}
+        // style={{
+        //   backgroundImage: `url(${process.env.PUBLIC_URL}/images/coffee_background.png)`,
+        // }}
       >
         <h2>{bannerText.toLocaleUpperCase()}</h2>
         <div className="deal-menu">
